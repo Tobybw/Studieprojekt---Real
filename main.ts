@@ -89,8 +89,8 @@ function createLevel () {
         tiles.setCurrentTilemap(tilemap`level1`)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
         music.play(music.createSong(hex`
-                                        00780004080200
-                                        `), music.PlaybackMode.LoopingInBackground)
+                                                                00780004080200
+                                                                `), music.PlaybackMode.LoopingInBackground)
         key1 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
             . . . . . 5 5 f f 5 5 5 . . . . 
@@ -449,8 +449,8 @@ function createLevel () {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`level2`)
         music.play(music.createSong(hex`
-                                        00780004080200
-                                        `), music.PlaybackMode.LoopingInBackground)
+                                                                00780004080200
+                                                                `), music.PlaybackMode.LoopingInBackground)
         mySprite.vy = 15
         mySprite.ay = 25
         mySprite.setImage(img`
@@ -792,8 +792,8 @@ function createLevel () {
         mySprite.ay = 100
         mySprite.vy = 15
         music.play(music.createSong(hex`
-                                        00780004080200
-                                        `), music.PlaybackMode.LoopingInBackground)
+                                                                00780004080200
+                                                                `), music.PlaybackMode.LoopingInBackground)
         rightPlat = []
         wrongPlat = []
         for (let value4 of tiles.getTilesByType(assets.tile`myTile72`)) {
@@ -851,8 +851,8 @@ function createLevel () {
         scene.setBackgroundColor(9)
         tiles.setCurrentTilemap(tilemap`level4`)
         music.play(music.createSong(hex`
-                                        00780004080200
-                                        `), music.PlaybackMode.LoopingInBackground)
+                                                                00780004080200
+                                                                `), music.PlaybackMode.LoopingInBackground)
     }
     info.setLife(3)
     info.startCountdown(301)
@@ -1011,6 +1011,12 @@ let isHolding = false
 let canPick = false
 let level = 0
 let mySprite: Sprite = null
+game.splash("Taltyven Null 00")
+game.showLongText("Matematikbyen er i kaos! Taltyven Null har stjålet de fire Talnøgler og låst alle byens tal inde.", DialogLayout.Full)
+game.splash("Du er helten, der skal rejse gennem Gangeværket, Hajstrømmen, Ildhallen og Ligningstårnet for at hente dem tilbage.")
+game.splash("Men pas på. Du har kun 10 minutter til at klare hver bane, og kun 3 liv! Et forkert svar eller for meget spildtid kan koste dig alt.")
+game.splash("Til sidst venter Null selv. Besejr ham i tre runder, og bring tallene tilbage til Matematikbyen.")
+game.splash("Bliv den sande Matematikmester!")
 mySprite = sprites.create(img`
     . . . f f f f f f f f . . . . . 
     . . f 2 2 2 2 2 2 2 2 f . . . . 
