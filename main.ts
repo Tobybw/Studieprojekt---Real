@@ -6,10 +6,6 @@ namespace SpriteKind {
     export const Shark = SpriteKind.create()
     export const Platform = SpriteKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile65`, function (sprite, location) {
-    mySprite.setVelocity(0, -60)
-    info.changeLifeBy(-1)
-})
 // Pickup logic: Press B while overlapping a Result sprite
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (level == 1) {
@@ -88,9 +84,6 @@ function createLevel () {
         scene.setBackgroundColor(14)
         tiles.setCurrentTilemap(tilemap`level1`)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
-        music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
         key1 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
             . . . . . 5 5 f f 5 5 5 . . . . 
@@ -109,7 +102,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key1, tiles.getTileLocation(73, 12))
+        tiles.placeOnTile(key1, tiles.getTileLocation(5, 12))
         animation.runImageAnimation(
         key1,
         [img`
@@ -448,9 +441,6 @@ function createLevel () {
     } else if (level == 2) {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`level2`)
-        music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
         mySprite.vy = 15
         mySprite.ay = 25
         mySprite.setImage(img`
@@ -489,7 +479,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key2, tiles.getTileLocation(73, 13))
+        tiles.placeOnTile(key2, tiles.getTileLocation(5, 13))
         animation.runImageAnimation(
         key2,
         [img`
@@ -791,9 +781,6 @@ function createLevel () {
             `)
         mySprite.ay = 100
         mySprite.vy = 15
-        music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
         rightPlat = []
         wrongPlat = []
         for (let value of tiles.getTilesByType(assets.tile`myTile72`)) {
@@ -899,8 +886,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Platform, function (sprite, otherSprite) {
     if (isInArray(wrongPlat, sprite) == true) {
-        tiles.setWallAt(otherSprite.tilemapLocation(), false)
         sprites.destroy(otherSprite)
+        tiles.setWallAt(otherSprite.tilemapLocation(), false)
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSprite) {
@@ -938,6 +925,7 @@ function clearLevel () {
         sprites.destroy(value4)
     }
     info.changeScoreBy(info.score() + info.countdown())
+    music.stopAllSounds()
     tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
     createLevel()
 }
@@ -1035,21 +1023,36 @@ mySprite.ay = 100
 mySprite.z = 100
 game.setDialogTextColor(0)
 game.setDialogFrame(img`
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
     `)
 game.setDialogCursor(img`
     . . . . . . . . . . . . . . . . 
@@ -1073,6 +1076,7 @@ level = 1
 canPick = true
 isHolding = false
 state = 0
+let canTakeDmg = true
 info.setScore(0)
 createLevel()
 game.onUpdateInterval(1000, function () {
@@ -1499,5 +1503,15 @@ forever(function () {
 forever(function () {
     if (isHolding == true) {
         heldItem.setPosition(mySprite.x - 10, mySprite.y)
+    }
+})
+forever(function () {
+    if (canTakeDmg == true && mySprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile65`)) {
+        canTakeDmg = false
+        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
+        mySprite.vy = -100
+        pause(100)
+        info.changeLifeBy(-1)
+        canTakeDmg = true
     }
 })
