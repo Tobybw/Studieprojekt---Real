@@ -6,6 +6,7 @@ namespace SpriteKind {
     export const Shark = SpriteKind.create()
     export const Platform = SpriteKind.create()
     export const Boss = SpriteKind.create()
+    export const Lever = SpriteKind.create()
 }
 // Pickup logic: Press B while overlapping a Result sprite
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -28,7 +29,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             pause(200)
             canPick = true
         }
-    } else if (level == 2) {
+    } else if (level == 2 || level == 4) {
         if (mySprite.vx >= 0 && canShoot == 0) {
             canShoot = 1
             projectile = sprites.createProjectileFromSprite(img`
@@ -104,7 +105,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key1, tiles.getTileLocation(73, 12))
+        tiles.placeOnTile(key1, tiles.getTileLocation(5, 12))
         animation.runImageAnimation(
         key1,
         [img`
@@ -483,7 +484,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key2, tiles.getTileLocation(72, 13))
+        tiles.placeOnTile(key2, tiles.getTileLocation(5, 13))
         animation.runImageAnimation(
         key2,
         [img`
@@ -804,7 +805,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
-        tiles.placeOnTile(key3, tiles.getTileLocation(72, 12))
+        tiles.placeOnTile(key3, tiles.getTileLocation(5, 12))
         animation.runImageAnimation(
         key3,
         [img`
@@ -1176,6 +1177,31 @@ function createLevel () {
             ...................111..........
             `, SpriteKind.Boss)
         tiles.placeOnTile(Null, tiles.getTileLocation(1, 4))
+        levers = sprites.allOfKind(SpriteKind.Lever)
+        for (let value of tiles.getTilesByType(assets.tile`myTile75`)) {
+            lever = sprites.create(img`
+                . . . d d d d d d d d d . . . . 
+                . . . d d f f f f f d d . . . . 
+                . . . d f f c c c f f d . . . . 
+                . . . d f c c c c c f d . . . . 
+                . . . d f c c c c c f d . . . . 
+                . . . d f f c c c f f d . . . . 
+                . . . d d f f 1 f f d d . . . . 
+                . . . d d d d 1 d d d d . . . . 
+                . . . d d d d f d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                . . . d d d d d d d d d . . . . 
+                `, SpriteKind.Lever)
+            levers.unshift(lever)
+        }
+        for (let value of tiles.getTilesByType(assets.tile`myTile75`)) {
+            tiles.setTileAt(value, assets.tile`transparency16`)
+        }
     }
     info.setLife(3)
     info.startCountdown(301)
@@ -1215,7 +1241,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         mySprite.vy = -40
     } else if (level == 3 || level == 4) {
         if (jumpcounter < 2) {
-            mySprite.setVelocity(0, -50)
+            mySprite.setVelocity(0, -60)
             jumpcounter += 1
         }
     }
@@ -1226,12 +1252,62 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Platform, function (sprite, othe
         sprites.destroy(otherSprite)
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Lever, function (sprite, otherSprite) {
+    if (otherSprite == levers[1] || (otherSprite == levers[5] || otherSprite == levers[6])) {
+        animation.runImageAnimation(
+        otherSprite,
+        [img`
+            . . . d d d d d d d d d . . . . 
+            . . . d d f f f f f d d . . . . 
+            . . . d f f c c c f f d . . . . 
+            . . . d f c c c c c f d . . . . 
+            . . . d f c c c c c f d . . . . 
+            . . . d f f c c c f f d . . . . 
+            . . . d d f f 1 f f d d . . . . 
+            . . . d d d d 1 d d d d . . . . 
+            . . . d d d d f d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            `,img`
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            . . . d d d d f d d d d . . . . 
+            . . . d d d d 1 d d d d . . . . 
+            . . . d d f f 1 f f d d . . . . 
+            . . . d f f 7 7 7 f f d . . . . 
+            . . . d f 7 7 7 7 7 f d . . . . 
+            . . . d f 7 7 7 7 7 f d . . . . 
+            . . . d f f 7 7 7 f f d . . . . 
+            . . . d d f f f f f d d . . . . 
+            . . . d d d d d d d d d . . . . 
+            `],
+        200,
+        false
+        )
+        state += 1
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
     game.showLongText("Et skridt tættere på at redde Matematikbyen!", DialogLayout.Center)
     animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     level += 1
     clearLevel()
+})
+info.onLifeZero(function () {
+    game.gameOver(false)
+    game.setGameOverMessage(false, "GAME OVER!")
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
 })
 function isInArray (array: any[], sprite: Sprite) {
     for (let index4 = 0; index4 <= array.length - 1; index4++) {
@@ -1302,9 +1378,11 @@ function changeState () {
         }
     } else if (level == 4) {
         if (state == 1) {
+        	
+        } else if (state == 1) {
             music.stopAllSounds()
             music.play(music.createSong(hex`0073000408020302001c000c960064006d019001000478002c010000640032000000000a0600050c0010001400011930003400011904001c00100500640000041e000004000000000000000000000000000a040004c00000000200011d02000400011d04000600012006000800012008000a0001240a000c0001240c000e0001250e001000012510001200012712001400012714001600012416001800012418001a0001201a001c0001201c001e00011e1e002000011e20002200011d22002400011d24002600012026002800012028002a0001242a002c0001242c002e0001252e003000012530003200012732003400012734003600012436003800012438003a0001203a003c0001203c003e00011e3e004000011e06001c00010a006400f4016400000400000000000000000000000000000000025a0004000600012c08000c0001290c000e00012c10001400012914001800012c18001c0001291c002000012c20002400012924002800012c28002c0001292c003000012c30003400012934003800012c38003c0001293c004000012c`), music.PlaybackMode.LoopingInBackground)
-        } else if (state == 1) {
+        } else if (false) {
             music.stopAllSounds()
             music.play(music.createSong(hex`0082000408020302001c000c960064006d019001000478002c010000640032000000000a0600050c0010001400011930003400011904001c00100500640000041e000004000000000000000000000000000a040004c00000000200011d02000400011d04000600012006000800012008000a0001240a000c0001240c000e0001250e001000012510001200012712001400012714001600012416001800012418001a0001201a001c0001201c001e00011e1e002000011e20002200011d22002400011d24002600012026002800012028002a0001242a002c0001242c002e0001252e003000012530003200012732003400012734003600012436003800012438003a0001203a003c0001203c003e00011e3e004000011e06001c00010a006400f4016400000400000000000000000000000000000000025a0004000600012c08000c0001290c000e00012c10001400012914001800012c18001c0001291c002000012c20002400012924002800012c28002c0001292c003000012c30003400012934003800012c38003c0001293c004000012c`), music.PlaybackMode.LoopingInBackground)
         }
@@ -1318,6 +1396,8 @@ let Currentanimation = 0
 let shark: Sprite = null
 let jumpcounter = 0
 let apple: Sprite = null
+let lever: Sprite = null
+let levers: Sprite[] = []
 let Null: Sprite = null
 let platformBad: Sprite = null
 let platformgood: Sprite = null
@@ -1437,7 +1517,7 @@ game.onUpdateInterval(1000, function () {
             . . . . . f . . f f . . . . . . 
             . . . . . . . . . f . . . . . . 
             `, SpriteKind.Shark)
-        shark.setPosition(1300, randint(mySprite.y + 100, mySprite.y + -100))
+        shark.setPosition(scene.cameraProperty(CameraProperty.Right) + 320, randint(scene.cameraProperty(CameraProperty.Bottom) + 160, scene.cameraProperty(CameraProperty.Top) - 100))
         shark.setVelocity(-50, 0)
         shark.setFlag(SpriteFlag.GhostThroughTiles, true)
         shark.setFlag(SpriteFlag.GhostThroughWalls, true)
@@ -1825,17 +1905,10 @@ forever(function () {
     }
 })
 forever(function () {
-    if (info.life() == 0) {
-        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
-        game.gameOver(false)
-        game.setGameOverMessage(false, "GAME OVER!")
-    }
-})
-forever(function () {
     if (info.countdown() == 0) {
-        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
         game.gameOver(false)
         game.setGameOverMessage(false, "GAME OVER!")
+        music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
     }
 })
 forever(function () {
