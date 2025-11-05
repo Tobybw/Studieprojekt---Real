@@ -934,8 +934,8 @@ function clearLevel () {
         sprites.destroy(value4)
     }
     info.changeScoreBy(info.score() + info.countdown())
-    music.stopAllSounds()
     tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
+    music.stopAllSounds()
     createLevel()
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile27`, function (sprite, location) {
