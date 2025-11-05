@@ -6,10 +6,6 @@ namespace SpriteKind {
     export const Shark = SpriteKind.create()
     export const Platform = SpriteKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile65`, function (sprite, location) {
-    mySprite.setVelocity(0, -60)
-    info.changeLifeBy(-1)
-})
 // Pickup logic: Press B while overlapping a Result sprite
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (level == 1) {
@@ -87,7 +83,7 @@ function createLevel () {
     if (level == 1) {
         scene.setBackgroundColor(14)
         tiles.setCurrentTilemap(tilemap`level1`)
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 10))
         music.play(music.createSong(hex`0078000408020603001c0001dc00690000045e010004000000000000000000000564000104000306001c002000012a04001c00100500640000041e000004000000000000000000000000000a0400040c0018001c00011d20002400011d05001c000f0a006400f4010a0000040000000000000000000000000000000002240000000400012a04000800012708000c0001240c001000012a10001400012714001800012406001c00010a006400f401640000040000000000000000000000000000000002180028002c0001272c003000012730003400012434003800012408001c000e050046006603320000040a002d00000064001400013200020100020c0024002800012038003c00012009010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800180004000500010a08000900010810001100010a140015000108`), music.PlaybackMode.LoopingInBackground)
         key1 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
@@ -107,7 +103,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key1, tiles.getTileLocation(73, 12))
+        tiles.placeOnTile(key1, tiles.getTileLocation(5, 12))
         animation.runImageAnimation(
         key1,
         [img`
@@ -485,7 +481,7 @@ function createLevel () {
             . . . 5 5 5 5 5 5 5 . . . . . . 
             . . . 5 5 5 5 5 5 5 . . . . . . 
             `, SpriteKind.Key)
-        tiles.placeOnTile(key2, tiles.getTileLocation(73, 13))
+        tiles.placeOnTile(key2, tiles.getTileLocation(5, 13))
         animation.runImageAnimation(
         key2,
         [img`
@@ -836,10 +832,10 @@ function createLevel () {
             tiles.placeOnTile(platformBad, value5)
         }
         for (let value32 of tiles.getTilesByType(assets.tile`myTile72`)) {
-            tiles.setTileAt(value32, assets.tile`myTile65`)
+            tiles.setTileAt(value32, assets.tile`myTile74`)
         }
         for (let value33 of tiles.getTilesByType(assets.tile`myTile73`)) {
-            tiles.setTileAt(value33, assets.tile`myTile65`)
+            tiles.setTileAt(value33, assets.tile`myTile74`)
         }
     } else if (level == 4) {
         scene.setBackgroundColor(9)
@@ -890,7 +886,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Platform, function (sprite, otherSprite) {
-    if (isInArray(wrongPlat, sprite) == true) {
+    if (isInArray(wrongPlat, otherSprite) == true) {
         tiles.setWallAt(otherSprite.tilemapLocation(), false)
         sprites.destroy(otherSprite)
     }
@@ -911,7 +907,7 @@ function isInArray (array: any[], sprite: Sprite) {
     return false
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    if (info.life() < 4) {
+    if (info.life() <= 3) {
         info.changeLifeBy(1)
         sprites.destroy(otherSprite)
     }
@@ -952,18 +948,18 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile27`, function (sprite, 
 function changeState () {
     if (state == 1) {
         tiles.setWallAt(tiles.getTileLocation(30, 12), false)
-        tiles.setTileAt(tiles.getTileLocation(30, 12), assets.tile`transparency16`)
+        tiles.setTileAt(tiles.getTileLocation(30, 12), assets.tile`myTile4`)
         tiles.setTileAt(tiles.getTileLocation(28, 12), assets.tile`myTile20`)
         tiles.setTileAt(tiles.getTileLocation(27, 12), assets.tile`myTile16`)
     } else if (state == 2) {
         tiles.setWallAt(tiles.getTileLocation(50, 12), false)
-        tiles.setTileAt(tiles.getTileLocation(50, 12), assets.tile`transparency16`)
+        tiles.setTileAt(tiles.getTileLocation(50, 12), assets.tile`myTile4`)
         tiles.setTileAt(tiles.getTileLocation(48, 12), assets.tile`myTile20`)
         tiles.setTileAt(tiles.getTileLocation(47, 12), assets.tile`myTile16`)
     } else if (state == 3) {
         tiles.setWallAt(tiles.getTileLocation(70, 12), false)
         for (let index5 = 0; index5 <= 2; index5++) {
-            tiles.setTileAt(tiles.getTileLocation(70 + index5, 12), assets.tile`transparency16`)
+            tiles.setTileAt(tiles.getTileLocation(70 + index5, 12), assets.tile`myTile4`)
         }
         tiles.setTileAt(tiles.getTileLocation(68, 12), assets.tile`myTile20`)
         tiles.setTileAt(tiles.getTileLocation(67, 12), assets.tile`myTile16`)
@@ -1498,5 +1494,11 @@ forever(function () {
 forever(function () {
     if (isHolding == true) {
         heldItem.setPosition(mySprite.x - 10, mySprite.y)
+    }
+})
+forever(function () {
+    if (mySprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile65`)) {
+        mySprite.vy = -50
+        info.changeLifeBy(-1)
     }
 })
