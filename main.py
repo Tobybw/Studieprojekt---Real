@@ -6,16 +6,6 @@ class SpriteKind:
     Cogwheel = SpriteKind.create()
     Shark = SpriteKind.create()
     Platform = SpriteKind.create()
-
-def on_overlap_tile(sprite, location):
-    mySprite.set_velocity(0, -60)
-    info.change_life_by(-1)
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile65
-        """),
-    on_overlap_tile)
-
 # Pickup logic: Press B while overlapping a Result sprite
 
 def on_b_pressed():
@@ -23,9 +13,9 @@ def on_b_pressed():
     if level == 1:
         if isHolding == False and canPick == True:
             # Check all sprites of kind Result
-            for sprite2 in sprites.all_of_kind(SpriteKind.Result):
-                if mySprite.overlaps_with(sprite2):
-                    heldItem = sprite2
+            for sprite in sprites.all_of_kind(SpriteKind.Result):
+                if mySprite.overlaps_with(sprite):
+                    heldItem = sprite
                     isHolding = True
                     canPick = False
                     break
@@ -103,10 +93,6 @@ def createLevel():
             level1
             """))
         tiles.place_on_tile(mySprite, tiles.get_tile_location(0, 12))
-        music.play(music.create_song(hex("""
-                00780004080200
-                """)),
-            music.PlaybackMode.LOOPING_IN_BACKGROUND)
         key1 = sprites.create(img("""
                 . . . . . . 5 5 5 5 5 . . . . .
                 . . . . . 5 5 f f 5 5 5 . . . .
@@ -126,7 +112,7 @@ def createLevel():
                 . . . 5 5 5 5 5 5 5 . . . . . .
                 """),
             SpriteKind.Key)
-        tiles.place_on_tile(key1, tiles.get_tile_location(73, 12))
+        tiles.place_on_tile(key1, tiles.get_tile_location(5, 12))
         animation.run_image_animation(key1,
             [img("""
                     . . . . . . 5 5 5 5 5 . . . . .
@@ -507,10 +493,6 @@ def createLevel():
         tiles.set_current_tilemap(tilemap("""
             level2
             """))
-        music.play(music.create_song(hex("""
-                00780004080200
-                """)),
-            music.PlaybackMode.LOOPING_IN_BACKGROUND)
         mySprite.vy = 15
         mySprite.ay = 25
         mySprite.set_image(img("""
@@ -550,7 +532,7 @@ def createLevel():
                 . . . 5 5 5 5 5 5 5 . . . . . .
                 """),
             SpriteKind.Key)
-        tiles.place_on_tile(key2, tiles.get_tile_location(73, 13))
+        tiles.place_on_tile(key2, tiles.get_tile_location(5, 13))
         animation.run_image_animation(key2,
             [img("""
                     . . . . . . 5 5 5 5 5 . . . . .
@@ -867,10 +849,6 @@ def createLevel():
             """))
         mySprite.ay = 100
         mySprite.vy = 15
-        music.play(music.create_song(hex("""
-                00780004080200
-                """)),
-            music.PlaybackMode.LOOPING_IN_BACKGROUND)
         rightPlat = []
         wrongPlat = []
         for value4 in tiles.get_tiles_by_type(assets.tile("""
@@ -942,7 +920,7 @@ def createLevel():
         music.play(music.create_song(hex("""
                 00780004080200
                 """)),
-            music.PlaybackMode.LOOPING_IN_BACKGROUND)
+            music.PlaybackMode.UNTIL_DONE)
     info.set_life(3)
     info.start_countdown(301)
     scene.camera_follow_sprite(mySprite)
@@ -973,7 +951,7 @@ def createLevel():
             transparency16
             """))
 
-def on_on_overlap(sprite3, otherSprite):
+def on_on_overlap(sprite2, otherSprite):
     info.change_life_by(-1)
     sprites.destroy(otherSprite)
     pause(2000)
@@ -991,13 +969,13 @@ def on_a_pressed():
             jumpcounter += 1
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
-def on_on_overlap2(sprite4, otherSprite2):
-    if isInArray(wrongPlat, sprite4) == True:
-        tiles.set_wall_at(otherSprite2.tilemap_location(), False)
+def on_on_overlap2(sprite3, otherSprite2):
+    if isInArray(wrongPlat, sprite3) == True:
         sprites.destroy(otherSprite2)
+        tiles.set_wall_at(otherSprite2.tilemap_location(), False)
 sprites.on_overlap(SpriteKind.player, SpriteKind.Platform, on_on_overlap2)
 
-def on_on_overlap3(sprite5, otherSprite3):
+def on_on_overlap3(sprite4, otherSprite3):
     global level
     sprites.destroy(otherSprite3)
     game.show_long_text("Et skridt tættere på at redde Matematikbyen!",
@@ -1007,15 +985,15 @@ def on_on_overlap3(sprite5, otherSprite3):
     clearLevel()
 sprites.on_overlap(SpriteKind.player, SpriteKind.Key, on_on_overlap3)
 
-def isInArray(array: List[any], sprite6: Sprite):
+def isInArray(array: List[any], sprite5: Sprite):
     index4 = 0
     while index4 <= len(array) - 1:
-        if array[index4] == sprite6:
+        if array[index4] == sprite5:
             return True
         index4 += 1
     return False
 
-def on_on_overlap4(sprite7, otherSprite4):
+def on_on_overlap4(sprite6, otherSprite4):
     if info.life() < 4:
         info.change_life_by(1)
         sprites.destroy(otherSprite4)
@@ -1031,10 +1009,11 @@ def clearLevel():
     for value45 in sprites.all_of_kind(SpriteKind.food):
         sprites.destroy(value45)
     info.change_score_by(info.score() + info.countdown())
+    music.stop_all_sounds()
     tiles.place_on_tile(mySprite, tiles.get_tile_location(0, 12))
     createLevel()
 
-def on_overlap_tile2(sprite8, location2):
+def on_overlap_tile(sprite7, location):
     global isHolding, canPick, state
     if controller.B.is_pressed() and isHolding == True:
         if heldItem == Allresult1[3] or (heldItem == Allresult2[0] or heldItem == Allresult3[3]):
@@ -1052,7 +1031,7 @@ scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
         myTile27
         """),
-    on_overlap_tile2)
+    on_overlap_tile)
 
 def changeState():
     if state == 1:
@@ -1099,9 +1078,9 @@ def changeState():
                 myTile16
                 """))
 
-def on_on_overlap5(sprite9, otherSprite5):
+def on_on_overlap5(sprite8, otherSprite5):
     sprites.destroy(otherSprite5, effects.bubbles, 100)
-    sprites.destroy(sprite9)
+    sprites.destroy(sprite8)
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.Shark, on_on_overlap5)
 
 Currentanimation = 0
@@ -1159,21 +1138,36 @@ mySprite.ay = 100
 mySprite.z = 100
 game.set_dialog_text_color(0)
 game.set_dialog_frame(img("""
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . .
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
+    ..............................
     """))
 game.set_dialog_cursor(img("""
     . . . . . . . . . . . . . . . .
@@ -1197,6 +1191,7 @@ level = 1
 canPick = True
 isHolding = False
 state = 0
+canTakeDmg = True
 info.set_score(0)
 createLevel()
 
@@ -1609,3 +1604,17 @@ def on_forever5():
     if isHolding == True:
         heldItem.set_position(mySprite.x - 10, mySprite.y)
 forever(on_forever5)
+
+def on_forever6():
+    global canTakeDmg
+    if canTakeDmg == True and mySprite.tile_kind_at(TileDirection.BOTTOM, assets.tile("""
+        myTile65
+        """)):
+        canTakeDmg = False
+        music.play(music.melody_playable(music.wawawawaa),
+            music.PlaybackMode.IN_BACKGROUND)
+        mySprite.vy = -100
+        pause(100)
+        info.change_life_by(-1)
+        canTakeDmg = True
+forever(on_forever6)
