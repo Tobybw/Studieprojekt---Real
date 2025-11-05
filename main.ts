@@ -89,8 +89,8 @@ function createLevel () {
         tiles.setCurrentTilemap(tilemap`level1`)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
         music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
+                                        00780004080200
+                                        `), music.PlaybackMode.LoopingInBackground)
         key1 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
             . . . . . 5 5 f f 5 5 5 . . . . 
@@ -449,8 +449,8 @@ function createLevel () {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`level2`)
         music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
+                                        00780004080200
+                                        `), music.PlaybackMode.LoopingInBackground)
         mySprite.vy = 15
         mySprite.ay = 25
         mySprite.setImage(img`
@@ -792,11 +792,11 @@ function createLevel () {
         mySprite.ay = 100
         mySprite.vy = 15
         music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
+                                        00780004080200
+                                        `), music.PlaybackMode.LoopingInBackground)
         rightPlat = []
         wrongPlat = []
-        for (let value of tiles.getTilesByType(assets.tile`myTile72`)) {
+        for (let value4 of tiles.getTilesByType(assets.tile`myTile72`)) {
             platformgood = sprites.create(img`
                 f e e e e e e e e e e e e e e f 
                 f f f f f f f f f f f f f f f f 
@@ -816,10 +816,10 @@ function createLevel () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Platform)
             rightPlat.unshift(platformgood)
-            tiles.placeOnTile(platformgood, value)
-            tiles.setWallAt(value, true)
+            tiles.placeOnTile(platformgood, value4)
+            tiles.setWallAt(value4, true)
         }
-        for (let value of tiles.getTilesByType(assets.tile`myTile73`)) {
+        for (let value5 of tiles.getTilesByType(assets.tile`myTile73`)) {
             platformBad = sprites.create(img`
                 f e e e e e e e e e e e e e e f 
                 f f f f f f f f f f f f f f f f 
@@ -839,25 +839,25 @@ function createLevel () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Platform)
             wrongPlat.unshift(platformBad)
-            tiles.placeOnTile(platformBad, value)
+            tiles.placeOnTile(platformBad, value5)
         }
-        for (let value3 of tiles.getTilesByType(assets.tile`myTile72`)) {
-            tiles.setTileAt(value3, assets.tile`myTile65`)
+        for (let value32 of tiles.getTilesByType(assets.tile`myTile72`)) {
+            tiles.setTileAt(value32, assets.tile`myTile65`)
         }
-        for (let value3 of tiles.getTilesByType(assets.tile`myTile73`)) {
-            tiles.setTileAt(value3, assets.tile`myTile65`)
+        for (let value33 of tiles.getTilesByType(assets.tile`myTile73`)) {
+            tiles.setTileAt(value33, assets.tile`myTile65`)
         }
     } else if (level == 4) {
         scene.setBackgroundColor(9)
         tiles.setCurrentTilemap(tilemap`level4`)
         music.play(music.createSong(hex`
-                            00780004080200
-                            `), music.PlaybackMode.LoopingInBackground)
+                                        00780004080200
+                                        `), music.PlaybackMode.LoopingInBackground)
     }
     info.setLife(3)
     info.startCountdown(301)
     scene.cameraFollowSprite(mySprite)
-    for (let value of tiles.getTilesByType(assets.tile`myTile63`)) {
+    for (let value6 of tiles.getTilesByType(assets.tile`myTile63`)) {
         apple = sprites.create(img`
             . . . . . e 7 . . . . . . . . . 
             . . . . . . 7 . . 7 f . . . . . 
@@ -876,8 +876,8 @@ function createLevel () {
             . . . . 2 2 2 2 2 2 2 . . . . . 
             . . . . . 2 f f f 2 . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(apple, value)
-        tiles.setTileAt(value, assets.tile`transparency16`)
+        tiles.placeOnTile(apple, value6)
+        tiles.setTileAt(value6, assets.tile`transparency16`)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Shark, function (sprite, otherSprite) {
@@ -911,8 +911,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSpri
     clearLevel()
 })
 function isInArray (array: any[], sprite: Sprite) {
-    for (let index = 0; index <= array.length - 1; index++) {
-        if (array[index] == sprite) {
+    for (let index4 = 0; index4 <= array.length - 1; index4++) {
+        if (array[index4] == sprite) {
             return true
         }
     }
@@ -925,17 +925,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     }
 })
 function clearLevel () {
-    for (let value4 of sprites.allOfKind(SpriteKind.Result)) {
-        sprites.destroy(value4)
+    for (let value42 of sprites.allOfKind(SpriteKind.Result)) {
+        sprites.destroy(value42)
     }
-    for (let value4 of sprites.allOfKind(SpriteKind.Shark)) {
-        sprites.destroy(value4)
+    for (let value43 of sprites.allOfKind(SpriteKind.Shark)) {
+        sprites.destroy(value43)
     }
-    for (let value4 of sprites.allOfKind(SpriteKind.Projectile)) {
-        sprites.destroy(value4)
+    for (let value44 of sprites.allOfKind(SpriteKind.Projectile)) {
+        sprites.destroy(value44)
     }
-    for (let value4 of sprites.allOfKind(SpriteKind.Food)) {
-        sprites.destroy(value4)
+    for (let value45 of sprites.allOfKind(SpriteKind.Food)) {
+        sprites.destroy(value45)
     }
     info.changeScoreBy(info.score() + info.countdown())
     tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
@@ -970,8 +970,8 @@ function changeState () {
         tiles.setTileAt(tiles.getTileLocation(47, 12), assets.tile`myTile16`)
     } else if (state == 3) {
         tiles.setWallAt(tiles.getTileLocation(70, 12), false)
-        for (let index = 0; index <= 2; index++) {
-            tiles.setTileAt(tiles.getTileLocation(70 + index, 12), assets.tile`transparency16`)
+        for (let index5 = 0; index5 <= 2; index5++) {
+            tiles.setTileAt(tiles.getTileLocation(70 + index5, 12), assets.tile`transparency16`)
         }
         tiles.setTileAt(tiles.getTileLocation(68, 12), assets.tile`myTile20`)
         tiles.setTileAt(tiles.getTileLocation(67, 12), assets.tile`myTile16`)
