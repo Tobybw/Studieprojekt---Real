@@ -538,7 +538,8 @@ function createLevel () {
         tiles.setCurrentTilemap(tilemap`level2`)
         music.play(music.createSong(hex`0078000408020401001c000f05001202c102c201000405002800000064002800031400060200042a0020002400012c24002800012a28002c0001292c003000012730003400012934003800012a38003c00012c07001c00020a006400f401640000040000000000000000000000000000000003180000000400012a08000c00012a10001400012a18001c00012a08001c000e050046006603320000040a002d000000640014000132000201000218000400080001270c00100001271400180001271c002000012709010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c8003000000001000104080009000104100011000104180019000104200021000104280029000104300031000104380039000104`), music.PlaybackMode.LoopingInBackground)
         game.showLongText("Level 2 - Divisionssøen", DialogLayout.Center)
-        game.showLongText("Løs divisionsstykket og følg skiltet med det rigtige svar for at nå til nøglen. Du kan skyde hajerne med din harpun, men skynd dig!", DialogLayout.Full)
+        game.showLongText("Løs divisions stykket og følg skiltet med det rigtige svar for at nå til nøglen.", DialogLayout.Center)
+        game.showLongText(" Du kan skyde hajerne med din harpun, men skynd dig!", DialogLayout.Center)
         mySprite.sayText("Vent Hajerne??", 2000, false)
         mySprite.vy = 15
         mySprite.ay = 25
@@ -861,8 +862,8 @@ function createLevel () {
     } else if (level == 3) {
         music.play(music.createSong(hex`005a000408020405001c000f0a006400f4010a0000040000000000000000000000000000000002180038003a00011b3a003c00011b3c003e00011d3e004000011d07001c00020a006400f401640000040000000000000000000000000000000003900000000200012402000400012404000600012206000800012208000a0001200a000c0001200c000e0001250e001000012510001200012412001400012414001600012216001800012220002200012422002400012424002600012226002800012228002a0001202a002c0001202c002e0001252e003000012530003200012432003400012434003600012236003800012208001c000e050046006603320000040a002d0000006400140001320002010002180018001a00011b1a001c00011b1c001e00011d1e002000011d09010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c80024000c000d00010a1800190001071a001b0001072c002d00010a3800390001073a003b000107`), music.PlaybackMode.LoopingInBackground)
         game.showLongText("Level 3 - Brøkhallen", DialogLayout.Center)
-        game.showLongText("Undgå lavaen ved at hoppe på platformene. Men pas på! Kun platforme med brøker, som kan Forkortes, er solide! ", DialogLayout.Full)
-        game.showLongText("Varmen er dog farlig så skynd dig! Brug din kappe ved at trykke hop 2 gange!", DialogLayout.Full)
+        game.showLongText("Undgå lavaen ved at hoppe på platformene. Men pas på! Kun platforme med brøker, som kan Forkortes, er solide! ", DialogLayout.Center)
+        game.showLongText("Varmen er dog farlig så skynd dig! Brug din kappe ved at trykke hop 2 gange!", DialogLayout.Center)
         scene.setBackgroundColor(15)
         tiles.setCurrentTilemap(tilemap`level3`)
         mySprite.sayText("Gotta go fast!", 1000, false)
@@ -1705,7 +1706,7 @@ info.onCountdownEnd(function () {
     game.gameOver(false)
     game.setGameOverMessage(false, "! Game Over !")
     music.stopAllSounds()
-    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.LoopingInBackground)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSprite) {
     if (level == 4 && state == 0) {
@@ -1762,8 +1763,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSpri
             . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . 
             `)
-        game.showLongText("Kun ved at løse alle Nulls ligninger, kan du redde Matematikbyen", DialogLayout.Center)
-        game.showLongText("Skyd håndtagene med det rigtige svar, inden Null fanger dig!", DialogLayout.Center)
+        game.showLongText("Kun ved at løse alle Nulls ligninger, kan du redde Matematikbyen", DialogLayout.Right)
+        game.showLongText("Skyd håndtagene med det rigtige svar, inden Null fanger dig!", DialogLayout.Right)
         Null.vx = 44
         Null.setFlag(SpriteFlag.GhostThroughWalls, true)
         Null.setFlag(SpriteFlag.GhostThroughTiles, true)
@@ -1776,6 +1777,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSpri
             pause(200)
         }
     } else if (level == 4 && state == 4) {
+        music.stopAllSounds()
         game.setGameOverPlayable(true, music.melodyPlayable(music.magicWand), true)
         game.setGameOverMessage(true, "Matematikbyen er reddet!")
         game.setGameOverEffect(true, effects.confetti)
@@ -1791,7 +1793,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSpri
 info.onLifeZero(function () {
     game.gameOver(false)
     game.setGameOverMessage(false, "! Game Over!")
-    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.InBackground)
+    music.stopAllSounds()
+    music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.LoopingInBackground)
 })
 function isInArray (array: any[], sprite: Sprite) {
     for (let index4 = 0; index4 <= array.length - 1; index4++) {
@@ -1981,7 +1984,7 @@ game.onUpdateInterval(1000, function () {
             . . . . . f . . f f . . . . . . 
             . . . . . . . . . f . . . . . . 
             `, SpriteKind.Shark)
-        shark.setPosition(scene.cameraProperty(CameraProperty.Right) + 320, randint(scene.cameraProperty(CameraProperty.Bottom) + 160, scene.cameraProperty(CameraProperty.Top) - 100))
+        shark.setPosition(scene.cameraProperty(CameraProperty.Right) + 260, randint(scene.cameraProperty(CameraProperty.Bottom), scene.cameraProperty(CameraProperty.Top)))
         shark.setVelocity(-50, 0)
         shark.setFlag(SpriteFlag.GhostThroughTiles, true)
         shark.setFlag(SpriteFlag.GhostThroughWalls, true)
