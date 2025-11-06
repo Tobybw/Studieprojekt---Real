@@ -83,10 +83,97 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function createLevel () {
     if (level == 1) {
-        scene.setBackgroundColor(14)
+        game.setDialogFrame(img`
+            . . . . . . . . . . . . . . . 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `)
+        game.setDialogTextColor(1)
+        game.splash("Taltyven Null")
+        game.showLongText("Matematikbyen er i kaos! Taltyven Null har stjålet de fire Talnøgler og låst alle byens tal inde. .", DialogLayout.Center)
+        game.showLongText(" Du må rejse igennem Gangeværket, Divisionssøen, Brøkhallen og til sidst Nulls Ligningsslot!!", DialogLayout.Center)
+        game.showLongText("Men pas på. Du har kun 5 minutter til hvert Level. Du har kun 3 liv så for mange forkerte svar kan koste dig alt!.", DialogLayout.Center)
+        tiles.setCurrentTilemap(tilemap`level5`)
+        game.splash("Bliv den sande Matematikmester!")
+        tiles.setCurrentTilemap(tilemap`level6`)
+        game.setDialogFrame(img`
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . 
+            `)
+        game.showLongText("-> Højre piletast : Bevæg dig mod højre  ", DialogLayout.Top)
+        game.showLongText("<- venstre piletast : Bevæg dig mod venstre", DialogLayout.Top)
+        game.showLongText("A / Space : Hop                    ", DialogLayout.Top)
+        game.showLongText("B / Enter : Saml objekter op eller Skyd med pile  ", DialogLayout.Top)
+        game.setDialogFrame(img`
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            `)
         tiles.setCurrentTilemap(tilemap`level1`)
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 10))
+        game.showLongText("Level 1 - Gangeværket", DialogLayout.Center)
+        game.showLongText("Løs gangestykket på computeren og find den disc for at åbne døren", DialogLayout.Center)
         music.play(music.createSong(hex`0078000408020603001c0001dc00690000045e010004000000000000000000000564000104000306001c002000012a04001c00100500640000041e000004000000000000000000000000000a0400040c0018001c00011d20002400011d05001c000f0a006400f4010a0000040000000000000000000000000000000002240000000400012a04000800012708000c0001240c001000012a10001400012714001800012406001c00010a006400f401640000040000000000000000000000000000000002180028002c0001272c003000012730003400012434003800012408001c000e050046006603320000040a002d0000006400140001320002010002120024002800012038003c0001203c004000012009010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800180004000500010a08000900010810001100010a140015000108`), music.PlaybackMode.LoopingInBackground)
+        mySprite = sprites.create(img`
+            . . . f f f f f f f f . . . . . 
+            . . f 2 2 2 2 2 2 2 2 f . . . . 
+            . f 2 2 2 2 2 2 2 2 2 2 f f f f 
+            f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
+            f f f f f f f f f f f f f f f f 
+            . f 4 4 4 4 4 4 f 1 f 4 f . . . 
+            . f 4 4 4 4 4 4 f 8 f 4 f . . . 
+            . f 4 4 4 4 4 4 f f 4 4 f . . . 
+            . . f 4 4 4 4 4 4 4 4 f . . . . 
+            . . . f 4 4 4 4 2 2 f . . . . . 
+            . . . f f f f f f f f . . . . . 
+            . . . . . f 4 4 f . . . . . . . 
+            . 4 4 f f 2 2 2 2 f f 4 4 . . . 
+            . . . f 2 2 5 5 2 2 f . . . . . 
+            . f f f f f f f f f f f f . . . 
+            . f c c c f . . f c c c f . . . 
+            `, SpriteKind.Player)
+        controller.moveSprite(mySprite, 50, 0)
+        mySprite.setStayInScreen(true)
+        mySprite.ay = 100
+        mySprite.z = 100
+        scene.cameraFollowSprite(mySprite)
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 10))
         key1 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
             . . . . . 5 5 f f 5 5 5 . . . . 
@@ -445,6 +532,8 @@ function createLevel () {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`level2`)
         music.play(music.createSong(hex`0078000408020401001c000f05001202c102c201000405002800000064002800031400060200042a0020002400012c24002800012a28002c0001292c003000012730003400012934003800012a38003c00012c07001c00020a006400f401640000040000000000000000000000000000000003180000000400012a08000c00012a10001400012a18001c00012a08001c000e050046006603320000040a002d000000640014000132000201000218000400080001270c00100001271400180001271c002000012709010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c8003000000001000104080009000104100011000104180019000104200021000104280029000104300031000104380039000104`), music.PlaybackMode.LoopingInBackground)
+        game.showLongText("Level 2 - Divisionssøen", DialogLayout.Center)
+        game.showLongText("Løs divisionsstykket og følg skiltet med det rigtige svar for at nå til nøglen. Du kan skyde hajerne med din harpun, men skynd dig!", DialogLayout.Center)
         mySprite.vy = 15
         mySprite.ay = 25
         mySprite.setImage(img`
@@ -767,6 +856,9 @@ function createLevel () {
         scene.setBackgroundColor(15)
         tiles.setCurrentTilemap(tilemap`level3`)
         music.play(music.createSong(hex`005a000408020405001c000f0a006400f4010a0000040000000000000000000000000000000002180038003a00011b3a003c00011b3c003e00011d3e004000011d07001c00020a006400f401640000040000000000000000000000000000000003900000000200012402000400012404000600012206000800012208000a0001200a000c0001200c000e0001250e001000012510001200012412001400012414001600012216001800012220002200012422002400012424002600012226002800012228002a0001202a002c0001202c002e0001252e003000012530003200012432003400012434003600012236003800012208001c000e050046006603320000040a002d0000006400140001320002010002180018001a00011b1a001c00011b1c001e00011d1e002000011d09010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c80024000c000d00010a1800190001071a001b0001072c002d00010a3800390001073a003b000107`), music.PlaybackMode.LoopingInBackground)
+        game.showLongText("Level 3 - Brøkhallen", DialogLayout.Center)
+        game.showLongText("Undgå lavaen ved at hoppe på platformene med brøker", DialogLayout.Center)
+        game.showLongText("Du har fået din kappe på og kan nu lave double-jump ved at trykke på hop 2 gange. ", DialogLayout.Center)
         mySprite.setImage(img`
             . . . f f f f f f f f . . . . . 
             . . f 2 2 2 2 2 2 2 2 f . . . . 
@@ -1141,6 +1233,7 @@ function createLevel () {
     } else if (level == 4) {
         scene.setBackgroundColor(15)
         tiles.setCurrentTilemap(tilemap`level4`)
+        game.showLongText("Level 4 - Nulls Ligningsslot", DialogLayout.Center)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(2, 5))
         key4 = sprites.create(img`
             . . . . . . 5 5 5 5 5 . . . . . 
@@ -1472,7 +1565,6 @@ function createLevel () {
         info.startCountdown(301)
     }
     info.setLife(3)
-    scene.cameraFollowSprite(mySprite)
     for (let value62 of tiles.getTilesByType(assets.tile`myTile63`)) {
         apple = sprites.create(img`
             . . . . . e 7 . . . . . . . . . 
@@ -1821,69 +1913,12 @@ let key1: Sprite = null
 let projectile: Sprite = null
 let canShoot = 0
 let heldItem: Sprite = null
+let mySprite: Sprite = null
 let state = 0
 let isHolding = false
 let canPick = false
 let level = 0
-let mySprite: Sprite = null
 scene.setBackgroundColor(8)
-game.setDialogFrame(img`
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    . . . . . . . . 
-    `)
-game.setDialogCursor(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `)
-game.setDialogTextColor(0)
-game.splash("Taltyven Null 00")
-game.showLongText("Matematikbyen er i kaos! Taltyven Null har stjålet de fire Talnøgler og låst alle byens tal inde.", DialogLayout.Full)
-game.splash("Du er helten, der skal rejse gennem Gangeværket, Hajstrømmen, Ildhallen og Ligningstårnet for at hente dem tilbage.")
-game.splash("Men pas på. Du har kun 10 minutter til at klare hver bane, og kun 3 liv! Et forkert svar eller for meget spildtid kan koste dig alt.")
-game.splash("Til sidst venter Null selv. Besejr ham i tre runder, og bring tallene tilbage til Matematikbyen.")
-game.splash("Bliv den sande Matematikmester!")
-mySprite = sprites.create(img`
-    . . . f f f f f f f f . . . . . 
-    . . f 2 2 2 2 2 2 2 2 f . . . . 
-    . f 2 2 2 2 2 2 2 2 2 2 f f f f 
-    f 2 2 2 2 2 2 2 2 2 2 2 2 2 2 f 
-    f f f f f f f f f f f f f f f f 
-    . f 4 4 4 4 4 4 f 1 f 4 f . . . 
-    . f 4 4 4 4 4 4 f 8 f 4 f . . . 
-    . f 4 4 4 4 4 4 f f 4 4 f . . . 
-    . . f 4 4 4 4 4 4 4 4 f . . . . 
-    . . . f 4 4 4 4 2 2 f . . . . . 
-    . . . f f f f f f f f . . . . . 
-    . . . . . f 4 4 f . . . . . . . 
-    . 4 4 f f 2 2 2 2 f f 4 4 . . . 
-    . . . f 2 2 5 5 2 2 f . . . . . 
-    . f f f f f f f f f f f f . . . 
-    . f c c c f . . f c c c f . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(mySprite, 50, 0)
-mySprite.setStayInScreen(true)
-mySprite.ay = 100
-mySprite.z = 100
 level = 1
 canPick = true
 isHolding = false
