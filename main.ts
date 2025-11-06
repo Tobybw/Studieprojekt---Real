@@ -1826,6 +1826,35 @@ let canPick = false
 let level = 0
 let mySprite: Sprite = null
 scene.setBackgroundColor(8)
+game.setDialogFrame(img`
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    `)
+game.setDialogCursor(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `)
+game.setDialogTextColor(0)
 game.splash("Taltyven Null 00")
 game.showLongText("Matematikbyen er i kaos! Taltyven Null har stjålet de fire Talnøgler og låst alle byens tal inde.", DialogLayout.Full)
 game.splash("Du er helten, der skal rejse gennem Gangeværket, Hajstrømmen, Ildhallen og Ligningstårnet for at hente dem tilbage.")
@@ -1854,42 +1883,6 @@ controller.moveSprite(mySprite, 50, 0)
 mySprite.setStayInScreen(true)
 mySprite.ay = 100
 mySprite.z = 100
-game.setDialogTextColor(0)
-game.setDialogFrame(img`
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . 
-    `)
-game.setDialogCursor(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `)
 level = 1
 canPick = true
 isHolding = false
