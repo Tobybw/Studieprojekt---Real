@@ -85,8 +85,36 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function createLevel () {
     if (level == 1) {
-        scene.setBackgroundColor(14)
+        scene.setBackgroundColor(15)
+        game.setDialogFrame(img`
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            f f f f f f f f f f f f f f f 
+            `)
+        game.splash("Taltyven Null")
+        game.showLongText("Matematikbyen er i kaos! Taltyven Null har stjålet de fire Talnøgler og låst alle byens tal inde. Du er helten, der skal rejse gennem. Til sidst venter Null selv. Besejr ham i tre runder, og bring tallene tilbage til Matematikbyen.", DialogLayout.Center)
+        game.showLongText("Gangeværket, Hajstrømmen, Ildhallen og Ligningstårnet for at hente dem tilbage. Men pas på. Du har kun 10 minutter til at klare hver bane, og kun 3 liv! Et forkert svar eller for meget spildtid kan koste dig alt.", DialogLayout.Center)
+        tiles.setCurrentTilemap(tilemap`level5`)
+        game.splash("Bliv den sande Matematikmester!")
+        tiles.setCurrentTilemap(tilemap`Mioubit`)
+        game.showLongText("->højre pil: Bevæg dig frem   ", DialogLayout.Top)
+        game.showLongText("<- venstre pil:gå tilbage", DialogLayout.Top)
+        game.showLongText("A: hop                     ", DialogLayout.Top)
+        game.showLongText("B: skyd, fang og  aflevere     ", DialogLayout.Top)
         tiles.setCurrentTilemap(tilemap`level1`)
+        scene.cameraFollowSprite(mySprite)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 12))
         music.play(music.createSong(hex`
                             00780004080200
@@ -856,7 +884,6 @@ function createLevel () {
     }
     info.setLife(3)
     info.startCountdown(301)
-    scene.cameraFollowSprite(mySprite)
     for (let value of tiles.getTilesByType(assets.tile`myTile63`)) {
         apple = sprites.create(img`
             . . . . . e 7 . . . . . . . . . 
@@ -880,6 +907,11 @@ function createLevel () {
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Npc, function (sprite, otherSprite) {
+    game.showLongText("\"Hop på tandhjulene og find det rigtige gangstykke! Tryk B ved det rigtige svar, og vend tilbage til kassen. Tryk B igen for at åbne porten.\"Forkert svar koster 1 liv. Løs 3 gangeopgaver for at klare banen og for at få den første nøgle.", DialogLayout.Bottom)
+    pause(2000)
+    sprites.destroy(otherSprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Shark, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
     sprites.destroy(otherSprite)
