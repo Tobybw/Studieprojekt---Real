@@ -1467,7 +1467,7 @@ function createLevel () {
         true
         )
         levers = sprites.allOfKind(SpriteKind.Lever)
-        for (let value of tiles.getTilesByType(assets.tile`myTile75`)) {
+        for (let value6 of tiles.getTilesByType(assets.tile`myTile75`)) {
             lever = sprites.create(img`
                 f . . . . . . . . . . . . . . . 
                 f . . . . f f f f f . . . . . . 
@@ -1487,10 +1487,10 @@ function createLevel () {
                 f . . . . . . . . . . . . . . . 
                 `, SpriteKind.Lever)
             levers.unshift(lever)
-            tiles.placeOnTile(lever, value)
+            tiles.placeOnTile(lever, value6)
         }
-        for (let value of tiles.getTilesByType(assets.tile`myTile75`)) {
-            tiles.setTileAt(value, assets.tile`transparency16`)
+        for (let value7 of tiles.getTilesByType(assets.tile`myTile75`)) {
+            tiles.setTileAt(value7, assets.tile`transparency16`)
         }
     }
     if (level == 3) {
@@ -1500,7 +1500,7 @@ function createLevel () {
     }
     info.setLife(3)
     scene.cameraFollowSprite(mySprite)
-    for (let value6 of tiles.getTilesByType(assets.tile`myTile63`)) {
+    for (let value62 of tiles.getTilesByType(assets.tile`myTile63`)) {
         apple = sprites.create(img`
             . . . . . e 7 . . . . . . . . . 
             . . . . . . 7 . . 7 f . . . . . 
@@ -1519,8 +1519,8 @@ function createLevel () {
             . . . . 2 2 2 2 2 2 2 . . . . . 
             . . . . . 2 f f f 2 . . . . . . 
             `, SpriteKind.Food)
-        tiles.placeOnTile(apple, value6)
-        tiles.setTileAt(value6, assets.tile`transparency16`)
+        tiles.placeOnTile(apple, value62)
+        tiles.setTileAt(value62, assets.tile`transparency16`)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Shark, function (sprite, otherSprite) {
@@ -1767,11 +1767,11 @@ function changeState () {
             Null.sayText("5x+6=81", 2000, false)
             mySprite.sayText("5x+6=81")
         } else if (state == 2) {
-            for (let index = 0; index <= 3; index++) {
-                tiles.setWallAt(tiles.getTileLocation(45, index + 2), false)
-                tiles.setTileAt(tiles.getTileLocation(45, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(43, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(42, index + 2), assets.tile`transparency16`)
+            for (let index6 = 0; index6 <= 3; index6++) {
+                tiles.setWallAt(tiles.getTileLocation(45, index6 + 2), false)
+                tiles.setTileAt(tiles.getTileLocation(45, index6 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(43, index6 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(42, index6 + 2), assets.tile`transparency16`)
             }
             Null.vx = 45
             music.stopAllSounds()
@@ -1779,11 +1779,11 @@ function changeState () {
             Null.sayText("4x+5x=36", 2000, false)
             mySprite.sayText("4x+5x=36")
         } else if (state == 3) {
-            for (let index = 0; index <= 3; index++) {
-                tiles.setWallAt(tiles.getTileLocation(90, index + 2), false)
-                tiles.setTileAt(tiles.getTileLocation(90, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(88, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(87, index + 2), assets.tile`transparency16`)
+            for (let index7 = 0; index7 <= 3; index7++) {
+                tiles.setWallAt(tiles.getTileLocation(90, index7 + 2), false)
+                tiles.setTileAt(tiles.getTileLocation(90, index7 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(88, index7 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(87, index7 + 2), assets.tile`transparency16`)
             }
             Null.vx = 50
             music.stopAllSounds()
@@ -1791,11 +1791,11 @@ function changeState () {
             Null.sayText("x^2+8=57", 2000, false)
             mySprite.sayText("x^2+8=57")
         } else if (state == 4) {
-            for (let index = 0; index <= 3; index++) {
-                tiles.setWallAt(tiles.getTileLocation(139, index + 2), false)
-                tiles.setTileAt(tiles.getTileLocation(139, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(137, index + 2), assets.tile`transparency16`)
-                tiles.setTileAt(tiles.getTileLocation(136, index + 2), assets.tile`transparency16`)
+            for (let index8 = 0; index8 <= 3; index8++) {
+                tiles.setWallAt(tiles.getTileLocation(139, index8 + 2), false)
+                tiles.setTileAt(tiles.getTileLocation(139, index8 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(137, index8 + 2), assets.tile`transparency16`)
+                tiles.setTileAt(tiles.getTileLocation(136, index8 + 2), assets.tile`transparency16`)
             }
             tiles.placeOnTile(key4, tiles.getTileLocation(139, 5))
             tiles.placeOnTile(Null, tiles.getTileLocation(132, 5))
